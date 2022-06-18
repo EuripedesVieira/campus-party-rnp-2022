@@ -93,9 +93,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} />,
           headerShadowVisible:false,
           headerShown: false
-        }
-      
-      }
+        }}      
 
 
       />
@@ -105,7 +103,17 @@ function BottomTabNavigator() {
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
+ 
+        options={{
+
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} />,
+          headerShadowVisible:false,
+          headerShown: false
+        }      
+      }
+
+
+*/
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;

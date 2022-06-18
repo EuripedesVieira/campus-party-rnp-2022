@@ -1,11 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Text, View,Image, TouchableOpacity, ScrollView } from "react-native";
 import Chanel from "../../model/Chanel";
 import style from "./style";
 
+type Props = {
+	description:string
+}
 
-
-export default function ChanelComponent (){
+export default function ChanelComponent(pros:Props){
 	const [showAbout,setShowAbout] = useState(false)
 	const [messageAbout,setMessageAbout] = useState(false)
 
@@ -26,7 +28,7 @@ export default function ChanelComponent (){
 
 
 	function showAboutText(){
-		if(showAbout) return 	<Text style={style.about}>{chanel.about}</Text>
+		if(showAbout) return 	<Text style={style.about}>{pros.description}</Text>
 		else return null
 	}
 

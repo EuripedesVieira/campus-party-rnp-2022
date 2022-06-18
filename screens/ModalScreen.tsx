@@ -4,15 +4,57 @@ import { Platform, StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import Player from '../components/Player';
-import Chanel from '../components/Chanel';
+import {useRoute, RouteProp } from '@react-navigation/native';
+import ModelVideo from '../model/Video';
+import { useEffect, useState } from 'react';
+import api from '../services/api';
+import ChanelComponent from '../components/Chanel';
 
 
 export default function ModalScreen() {
+  let {id} = useRoute<RouteProp<{params:{id:number}}>>().params;
+  const [video,setVideo] = useState<ModelVideo>();
+
+
+  useEffect( ()=>{
+    try {
+
+      api.get(`/video/${id}`).then(data=>{
+        let test:ModelVideo = data.data
+
+        let {	id,
+          title,
+          description,
+          keywords,
+          embed,
+        } = test 
+  
+        setVideo({
+          id,
+          title,
+          description,
+          keywords,
+          embed
+        })
+        
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  },[])
+
+  function showChanel(){
+    console.log(video);
+    if(video){
+      return  <ChanelComponent description={video.description} />
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Player/>
     <View style={styles.filho2}>
-      <Chanel/>
+      {showChanel()}
     </View>
   </View>
   );
@@ -50,3 +92,28 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
+
+
+/** 
+ * 
+   api.get(`/video/${id}`).then(data=>{
+        let video = data.data.videoList.map((model:ModelVideo)=>{
+          let {	id,
+            title,
+            description,
+            keywords,
+            embed
+          } = model 
+          return {
+            id,
+            title,
+            description,
+            keywords,
+            embed
+          }
+        })
+        setVideo(video)
+      })
+ * 
+ * 
+*/
