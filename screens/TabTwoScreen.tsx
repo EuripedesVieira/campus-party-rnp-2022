@@ -1,14 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text,View } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import Chanel from '../components/Chanel';
+import Player from '../components/Player';
+import Recommendation from '../components/Recommendation';
+
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <View style={styles.filho2}>
+        <Player/>
+      </View>
+      <View style={styles.filho2}>
+        <Chanel/>
+      </View>
     </View>
   );
 }
@@ -16,9 +22,26 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection:'column'
   },
+
+  filho1: {
+    flex: 1,
+    backgroundColor:'red'
+  },
+  filho2: {
+    flex: 3,
+    backgroundColor:'blue'
+
+  },
+
+  filho3: {
+    flex: 4,
+    backgroundColor:'blue'
+
+  },
+
+
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -29,3 +52,11 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
+
+
+/**
+  <View style={styles.filho1}>
+        <Chanel/>
+      </View>
+      <View style={styles.filho3}></View>
+*/ 
